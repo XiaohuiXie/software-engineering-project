@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+
+{{ pageData["Name"]}}
+<br>
+
+{{ pageData["Time"] + " " + pageData["Location"]}}
+
+
+
+<br>
+<div style="background-color:lightgray">
+    Create Assignment Type:
+    <form name="define assignment" action="{{ url_for('main.defineAssignmentType') }}" method="post">
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Type Name : <input type="text" name="typeName"><br>
+        Value : <input type="text" name="value"><br>
+        Number of Lowest to Drop : <input type="text" name="numberOfLowestToDrop"><br>
+        <button type="submit" class="submit" value="submit" name="submit">Create Assignment Type</button>
+    </form>
+</div>
+<br>
+
+<div style="background-color:cyan">
+    Create Assignment:
+    <form name="create assignment" action="{{ url_for('main.createAssignment') }}" method="post">
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Name : <input type="text" name="name"><br>
+        Description : <textarea rows="4" cols="50" name="description"></textarea><br>
+        Due Date : <input type="date" name="dueDate"><br>
+        Due Time : <input type="time" name="dueTime"><br>
+        Type : <input type="text" name="type">
+        <button type="submit" class="submit" value="submit" name="submit">Create Assignment</button>
+    </form>
+</div>
+<br>
+<div style="background-color:pink">
+    Create Announcement:
+    <form name="create announcement" action="{{ url_for('main.createAnnouncement') }}" method="post">
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Announcement : <input type="text" name="announcement"><br>
+        <button type="submit" class="submit" value="submit" name="submit">Create Announcement</button>
+    </form>
+</div>
+<br>
+<div style="background-color:cyan">
+    Add Student:
+    <form name="add student" action="{{ url_for('main.addStudentToClass') }}" method="post">
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Student ID : <input type="text" name="studentID"><br>
+        <button type="submit" class="submit" value="submit" name="submit">Add Student</button>
+    </form>
+</div>
+<br>
+
+
+<table>
+    <tr>
+        <th>
+            Announcements
+        </th>
+    </tr>
+    {% for announcement in pageData["Announcements"] %}
+        <tr>
+            <td>{{ announcement }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <tr>
+        <th>
+            Assignments
+        </th>
+    </tr>
+{% for assignment in pageData["Assignments"] %}
+    <tr>
+        <td><a href="{{ url_for('main.assignmentPageTeacher', assignmentID=assignment['ID'], classID=pageData['ClassID']) }}">{{ assignment["Name"] }}</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+<br>
+
+
+<table>
+    <tr>
+        <th>
+            Students
+        </th>
+    </tr>
+    {% for student in pageData["Students"] %}
+        <tr>
+            <td>{{ student["StudentID"] }}</td>
+            <td>{{ student["StudentName"] }}</td>
+            <td>{{ student["StudentGrade"] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+
+Mean: {{ pageData["Mean"] }} <br>
+SD: {{ pageData["SD"] }}<br>
+Median: {{ pageData["Median"] }}<br>
+{% endblock %}

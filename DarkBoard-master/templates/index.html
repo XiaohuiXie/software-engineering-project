@@ -1,0 +1,40 @@
+<!-- templates/login.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body
+    {
+        background-image:url({{url_for('static', filename='assets/img/platypusbg.jpg')}});
+    }
+</style>
+<div class="column is-4 is-offset-4">
+    <div class="box">
+       <div class="centeredBox" style="background-color:rgba(30, 30, 30, 0.85);padding:20px;position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);">
+            <div class="header">
+                <center><h1>Login with Dark Board UNO</h1></center>
+            </div>
+           <hr><br>
+            <form name="login" action="/login" method="post">
+                    <label>Username</label><br>
+                <input class="username" type="text" name="username"><br><br>
+                <label>Password</label><br>
+                <input class="password" type="password" name="password"><br><br><br>
+                <input type="submit" class="submit" value="Log In" name="submit">
+            </form>
+           {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                <label style="color:RED;">{{ messages[0] }}</label>
+            </div>
+        {% endif %}
+        {% endwith %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+
+{{ pageData["Name"]}}
+<br>
+{{ pageData["Description"] }}
+<br>
+Due: {{ pageData["DueDate"] + " " + pageData["DueTime"]}}
+<br>
+Current Grade: {{ pageData["Grade"] }}
+<br>
+Teacher Comment: {{ pageData["Teacher Comment"] }}
+<br>
+
+<form name="flag assignment" action="{{ url_for('main.setDiscrepFlag') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}"><br>
+        <input class="studentID" type="hidden" name="studentID" value="{{ current_user.id }}" ><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        <input class="flag" type="checkbox" name="flag" value="flag" {{ pageData['Discrep']}}> Grade Discrepancy <br>
+    <button type="submit" class="submit" value="submit" name="submit">Set Flags</button>
+</form>
+<br>
+<form name="comment assignment" action="{{ url_for('main.setStudentComment') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}"><br>
+        <input class="studentID" type="hidden" name="studentID" value="{{ current_user.id }}"><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Comment:<input class="comment" name="comment" value="{{ pageData['Student Comment'] }}" maxlength="200"><br>
+    <button type="submit" class="submit" value="submit" name="submit">Submit Comment</button>
+</form>
+
+{% endblock %}

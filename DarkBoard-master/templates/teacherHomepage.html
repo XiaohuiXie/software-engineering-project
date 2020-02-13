@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <title>Darkboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='teacher.css') }}">
+</head>
+
+<body style="margin:0;">
+    <div class="banner">
+        <img src="{{ url_for('static', filename='assets/img/logo_shadowed.png') }}" height="150">
+    </div>
+    <div class="divider">
+    </div>
+    <div class="widget">
+        <div class="widgetHeader">
+            <table width="100%">
+                <tr>
+                    <td>All Classes</td>
+                    <td><input type="text" placeholder="Search.." class="widgetSearch"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="widgetBody">
+                        <hr>
+            <table>
+                <tr>
+                    <td>Class</td>
+                    <td>Location</td>
+                    <td>Time</td>
+                </tr>
+                {% for class in pageData["Classes"] %}
+                    <tr>
+                        <td><a href="{{ url_for('main.classHomepageTeacher', classID=class['ClassID']) }}">{{ class["Name"] }}</td></a></td>
+                        <td>{{ class["Location"] }}</td>
+                        <td>{{ class["Time"] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

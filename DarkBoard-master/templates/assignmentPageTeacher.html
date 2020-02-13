@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+
+{{ pageData["Name"]}}
+<br>
+{{ pageData["Description"] }}
+<br>
+Due: {{ pageData["DueDate"] + " " + pageData["DueTime"]}}
+<br>
+<form name="delete assignment" action="{{ url_for('main.deleteAssignment') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}" ><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+    <button type="submit" class="submit" value="submit" name="submit">Delete Assignment</button>
+</form>
+
+<br>
+<form name="edit assignment" action="{{ url_for('main.editAssignment') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}" ><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+        Name : <input type="text" name="name" value="{{ pageData['Name'] }}"><br>
+        Description : <textarea rows="4" cols="50" name="description">{{ pageData['Description'] }}</textarea><br>
+        Due Date : <input type="date" name="dueDate" value="{{ pageData['DueDate'] }}"><br>
+        Due Time : <input type="time" name="dueTime" value="{{ pageData['DueTime'] }}"><br>
+        Type : <input type="text" name="type" value="{{ pageData['Type'] }}">
+    <button type="submit" class="submit" value="submit" name="submit">Edit Assignment</button>
+</form>
+<br>
+<form name="grade assignment" action="{{ url_for('main.gradeAssignment') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}"><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+         {% for student in pageData["Students"] %}
+        {{ student["ID"] }}, {{ student["Name"] }}
+        Grade:<input class="grade" name="{{ student['ID'] }}" value="{{ student['CurrentGrade'] }}">
+        {% if student["GradeDiscrep"] %}
+        *
+        {% endif %}
+        <br>
+        {% endfor %}
+    <button type="submit" class="submit" value="submit" name="submit">Grade Assignment</button>
+</form>
+<br>
+<br>
+Mean: {{ pageData["Mean"] }} <br>
+SD: {{ pageData["SD"] }}<br>
+Median: {{ pageData["Median"] }}<br>
+Complete: {{ pageData["Complete"] }}<br>
+Missing: {{ pageData["Missing"] }}<br>
+<br>
+Make a comment:
+<form name="comment assignment" action="{{ url_for('main.setTeacherComments') }}" method="post">
+        <input class="assignmentID" type="hidden" name="assignmentID" value="{{ pageData['ID'] }}"><br>
+        <input class="classID" type="hidden" name="classID" value="{{ pageData['ClassID'] }}" ><br>
+         {% for student in pageData["Students"] %}
+        {{ student["ID"] }}, {{ student["Name"] }}
+        Comment:<input class="comment" name="{{ student['ID'] }}" value="{{ student['CurrentComment'] }}" maxlength="200"><br>
+        {% endfor %}
+    <button type="submit" class="submit" value="submit" name="submit">Submit Comments</button>
+</form>
+<br>
+Student Comments:<br>
+{% for student in pageData["Students"] %}
+        {{ student["ID"] }}, {{ student["Name"] }}, {{ student["Student Comment"] }} <br>
+{% endfor %}
+{% endblock %}

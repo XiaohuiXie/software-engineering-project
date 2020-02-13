@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Darkboard Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='student.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+    </div>
+</div>
+<section>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a> </li>
+            <li><a href="#">Announcement</a> </li>
+            <li><a href="#">View Courses</a> </li>
+            <li><a href="#">Check Grades</a> </li>
+            <li><a href="#">Calender</a> </li>
+            <li><a href="#">Textbooks</a> </li>
+            <li><a href="#">Manage your account</a> </li>
+            <li><a href="#">Personalize settings</a> </li>
+            <li><a href="#">Professor information and networks</a> </li>
+
+
+        </ul>
+    </nav>
+    <hr/>
+
+    <article>
+        <h1>Home Page</h1>
+        <div class="widgetBody">
+                        <hr>
+            Classes:
+            <table>
+                <tr>
+                    <td>Class</td>
+                    <td>Location</td>
+                    <td>Time</td>
+                    <td>Teacher</td>
+                </tr>
+                {% for class in pageData["Classes"] %}
+                    <tr>
+                        <td><a href="{{ url_for('main.classHomepageStudent', classID=class['ClassID']) }}">{{ class["Name"] }}</a></td>
+                        <td>{{ class["Location"] }}</td>
+                        <td>{{ class["Time"] }}</td>
+                        <td>{{ class["Teacher"] }}</td>
+                        <td>{{ class["FinalGrade"] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </article>
+</section>
+
+
+{% endblock %}

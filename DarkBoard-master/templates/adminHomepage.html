@@ -1,0 +1,81 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+<div class="centeredBox">
+    <h1>Create New Account</h1>
+    <hr>
+    <form name="create" action="{{ url_for('auth.createAccount') }}" method="post">
+        <label>Name</label><br>
+        <input class="username" type="text" name="name"><br><br>
+        <label>Username</label><br>
+        <input class="username" type="text" name="username"><br><br>
+        <label>Temporary Password</label><br>
+        <input class="password" type="password" required minlength="8" maxlength="32" name="password"><br><br>
+        <label>Account Type</label><br>
+        <select name="type" style="width:98%">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="admin">Admin</option>
+        </select><br><br><br>
+        <input type="submit" class="submit" value="Create Account" name="submit">
+    </form>
+
+<br>
+<br>
+<h1>Delete Account</h1>
+    <hr>
+    <form name="delete" action="{{ url_for('auth.deleteAccount') }}" method="post">
+        <label>ID:</label><br>
+        <input class="ID" type="text" name="ID"><br><br>
+        <input type="submit" class="submit" value="Delete Account" name="submit">
+    </form>
+
+<br>
+<br>
+<h1>Create Class</h1>
+    <hr>
+    <form name="create class" action="{{ url_for('main.createClass') }}" method="post">
+        <label>Name:</label>
+        <input class="Name" type="text" name="name"><br><br>
+        <label>Location</label><br>
+        <input class="Location" type="text" name="location"><br><br>
+        <label>Teacher ID</label><br>
+        <input class="ID" type="text" name="ID"><br><br>
+        <label>Start Time</label><br>
+        <input type="time" name="timeStart"><br><br>
+        <label>End Time</label><br>
+        <input type="time" name="timeEnd"><br><br>
+        <label>Days</label><br>
+        <div style="padding-top:10px;">
+        <input type="checkbox" name="M" value="true"> <label>Monday</label>
+        <input type="checkbox" name="T" value="true"> <label>Tuesday</label>
+        <input type="checkbox" name="W" value="true"> <label>Wednesday</label>
+        <input type="checkbox" name="R" value="true"> <label>Thursday</label>
+        <input type="checkbox" name="F" value="true"> <label>Friday</label><br><br>
+        <input type="submit" class="submit" value="Create Class" name="submit">
+        </div>
+    </form>
+
+<br>
+<br>
+<h1>Delete Class</h1>
+    <hr>
+    <form name="delete class" action="{{ url_for('main.deleteClass') }}" method="post">
+        <label>ID:</label><br>
+        <input class="ID" type="text" name="ID"><br><br>
+        <input type="submit" class="submit" value="Delete Class" name="submit">
+    </form>
+
+<br>
+    <br>
+<h1>Clear Block</h1>
+    <hr>
+    <form name="clear block" action="{{ url_for('main.clearBlock') }}" method="post">
+        <label>ID:</label><br>
+        <input class="ID" type="text" name="ID"><br><br>
+        <input type="submit" class="submit" value="Clear Block" name="submit">
+    </form>
+</div><br><br><br><br><br>
+{% endblock %}

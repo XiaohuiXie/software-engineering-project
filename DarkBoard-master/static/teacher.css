@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face 
+{
+    font-family: Raleway_Regular;
+    src: url(assets/font/raleway/Raleway-Regular.ttf);
+}
+
+@font-face 
+{
+    font-family: Raleway_Thin;
+    src: url(assets/font/raleway/Raleway-Thin.ttf);
+}
+
+@font-face 
+{
+    font-family: Raleway_Bold;
+    src: url(assets/font/raleway/Raleway-Bold.ttf);
+}
+
+@font-face 
+{
+    font-family: Cursive_Regular;
+    src: url(assets/font/cursive.ttf);
+}
+
+body
+{
+	background: #212121;
+}
+
+.banner
+{
+	font-size: 80px;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Cursive_Regular;
+	color: #FFFFFF;
+    background-color: #404040;
+	
+	padding:20px;
+    /*background-image: url("assets/img/headerbg.png");*/
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.divider
+{
+	background: #FFF;
+	height: 6px;
+}
+
+.widgetContainer
+{
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.widget
+{
+    font-family: Raleway_Regular;
+    color: #FFF;
+    margin: 25px;
+    background-color: #686868;
+    float:left;
+    width: 46%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.widgetHeader
+{
+    font-size: 26px;
+    text-align: center;
+    padding: 5px;
+    background-color: #404040;
+    height:13%;
+}
+
+.widgetBody
+{
+    overflow-y: scroll;
+    height: 85%;
+}
+
+.widgetSearch
+{
+    height: 100%;
+    width: 70%;
+    background-color: #808080;
+    color: #FFF;
+    border: none;
+    padding: 10px;
+    font-family: Raleway_Regular;
+    font-size: 20px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #BDBDBD;
+  opacity: 1; /* Firefox */
+}
+
+.footer
+{
+	font-size: 16px;
+	vertical-align: middle;
+	font-family: Raleway_Bold;
+	background-color: #404040;
+	text-align: right;
+	color: #FFFFFF;
+	padding: 80px;
+	padding-top: 50px;
+}
+
+.footerSub
+{
+	font-size: 16px;
+	vertical-align: middle;
+	font-family: Raleway_Thin;
+	background: rgba(13,13,13,1.00);
+	text-align: right;
+	color: #FFFFFF;
+}
+
+.navBar
+{
+    position: sticky;
+    position: -webkit-sticky;
+    top:0;
+}
+
+button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+	background-color: rgba(0,0,0,0.00);
+	border:2px solid #009BE7;
+	padding: 1em;
+    border-radius: 10px;
+	transition-duration: 0.4s;
+	
+	font-size: 20px;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Raleway_Bold;
+	color: #FFFFFF;
+}
+
+button:hover {
+    background-color: #FFFFFF;
+    color: white;
+}
+
+hr
+{
+	color: #FFFFFF;
+}

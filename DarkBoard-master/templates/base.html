@@ -1,0 +1,92 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Darkboard Nav Example</title>
+    <!--NAVBAR DEPENDENCIES-->
+    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{url_for('static', filename='assets/JS/nav.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/JS/browserCheck.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/JS/buttonEffects.js')}}"></script>
+    <!--NAVBAR DEPENDENCIES END-->
+</head>
+
+<body>
+    {% if current_user.is_authenticated %}
+    <!--NAVBAR BEGIN-->
+    <!--The banner, this appears at the top of the page, but collapses into the nav bar when scrolling down-->
+    <div class="banner" id="banner" style="padding-top: 40px">
+        <img src="{{url_for('static', filename='assets/img/logo_shadowed.png')}}" width="400px">
+    </div>
+
+    <!--Everything in the "stick" div is the nav bar-->
+    <div class="stick">
+        <div class="navBar">
+            <img id="collapsedLogo" src="{{url_for('static', filename='assets/img/squareLogo.png')}}">
+            <!--These are the actual links in the nav bar.-->
+            {% if current_user.isAdmin() %}
+                <a style="min-height: 65px;" href="{{ url_for('main.adminHomepage') }}">&#8962; Home</a>
+            {% elif current_user.isStudent() %}
+                <a style="min-height: 65px;" href="{{ url_for('main.studentHomepage') }}">&#8962; Home</a>
+            {% elif current_user.isTeacher() %}
+                <a style="min-height: 65px;" href="{{ url_for('main.teacherHomepage') }}">&#8962; Home</a>
+            {% endif %}
+            <button class="menuMobile" onclick="openNav()">&#9776;</button>
+            <img class="logoMobile" src="{{url_for('static', filename='assets/img/logo.png')}}" width="800px">
+
+            <!--Login button, show if not logged in-->
+            <a href="" style="min-height: 65px; float:right; margin-right: 2vw;display: none">Login</a>
+
+            <!--Dropdown, only show if logged in-->
+            <div class="dropdown" style="display: block;">
+
+                <!--Profile dropdown button-->
+                <button class="dropdownButton"><img src="{{url_for('static', filename='assets/img/emptypfp.png')}}" id="pfp">
+                    <!--The name of the person logged in, I just put an example-->
+                    {{ current_user.name }}
+                    <i class="fa fa-caret-down"></i>
+                </button>
+
+                <!--The actual content that drops down-->
+                <div class="dropdownContent">
+                <span class="dropdownInfo">
+                    <!--Some basic info regarding the account-->
+                    ID: {{ current_user.id }} <br>
+                    Teacher Account
+                </span>
+                    <!--More nav links located in the dropdown-->
+                    <a href="{{ url_for('main.settings') }}">Settings</a>
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--The mobile side menu, add all links below in the same format-->
+    <div id="mobileMenu" class="mobileMenu">
+        {% if current_user.isAdmin() %}
+            <a href="{{ url_for('main.adminHomepage') }}">
+                Home
+            </a>
+        {% elif current_user.isStudent() %}
+            <a href="{{ url_for('main.studentHomepage') }}">
+                Home
+            </a>
+        {% elif current_user.isTeacher() %}
+            <a href="{{ url_for('main.teacherHomepage') }}">
+                Home
+            </a>
+        {% endif %}
+        <a href="#">Settings</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
+    {% endif %}
+    <div class="container has-text-centered">
+       {% block content %}
+       {% endblock %}
+    </div>
+</body>
+</html>

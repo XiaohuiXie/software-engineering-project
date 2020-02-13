@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{{ super(pageData) }}
+{% block content %}
+
+{{ pageData["Name"]}}
+<br>
+
+{{ pageData["Time"] + " " + pageData["Location"]}}
+<br>
+Current Final Grade:
+<br>
+{{ pageData["CurrentFinalGrade"] }}
+<br>
+<table>
+    <tr>
+        <th>
+            Announcements
+        </th>
+    </tr>
+    {% for announcement in pageData["Announcements"] %}
+        <tr>
+            <td>{{ announcement }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <tr>
+        <th>
+            Assignments
+        </th>
+    </tr>
+{% for assignment in pageData["Assignments"] %}
+    <tr>
+        <td><a href="{{ url_for('main.assignmentPageStudent', assignmentID=assignment['ID'], classID=pageData['ClassID']) }}">{{ assignment["Name"] }}</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+
+{% endblock %}
