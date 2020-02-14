@@ -7,9 +7,6 @@ from DarkBoard.models.classCollection import classesCollection
 from DarkBoard.models.assignmentsCollection import assignmentsCollection
 from twilio.rest import Client
 
-account_sid = 'AC9b661c29027fa262cd1362590d1e44aa'
-auth_token = '69288769a2a0bbe5416999d1b74e19ac'
-
 '''
 This is the interface to the Backend functionality, connecting the backend components
 into one centralized place.
